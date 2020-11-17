@@ -1,0 +1,28 @@
+<%= form_with(model:warehouse, local: true) do |f|  %>
+
+	<div class="form-group row">
+      <%= f.label :wh_code, class: "col-3 col-form-label" %>
+      <div class="col-9">   
+          <%= f.text_field :wh_code, class: "form-control shadow rounded", placeholder: "Warehouse code" %>
+      </div>  
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :wh_name, class: "col-3 col-form-label" %> </br>
+      <div class="col-9">
+        <%= f.text_field :wh_name, rows:9, class: "form-control shadow rounded", placeholder: "Name of the warehouse" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :pincode, class: "col-3 col-form-label" %> </br>
+      <div class="col-9">
+        <%= f.text_field :pincode, rows:9, class: "form-control shadow rounded", placeholder: "Pincode of the warehouse" %>
+      </div>
+    </div>
+
+    <div class="actions">
+    	<%= f.submit %>
+    </div>
+
+<% end %>
