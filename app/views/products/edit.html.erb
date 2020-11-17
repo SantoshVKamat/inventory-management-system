@@ -1,0 +1,19 @@
+<h1> Edit the product details </h1>
+
+<%= form_with(model: @product, local: :true) do |form| %>
+
+	<%= form.fields_for :inventories do |inventories_form| %>
+      <li>
+        <%= inventories_form.label :item_count %>
+        <%= inventories_form.text_field :item_count %>
+
+        <%= inventories_form.label :low_item_threshold %>
+        <%= inventories_form.text_field :low_item_threshold %>
+      </li>
+  <% end %>
+
+            
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

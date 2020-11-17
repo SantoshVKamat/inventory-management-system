@@ -22,7 +22,7 @@ table, th, td {
 	
 	<% @products.each do |product| %>
 	<tr> 
-		<td> <%= product.sku_code %> </td>
+		<td> <%= link_to product.sku_code, edit_product_path(product.id)  %> </td>
 		<td> <%= product.product_name %> </td>
 		<% product.warehouses.each do |warehouse| %>
 			<% @inventory = Inventory.find_by(warehouse_id: warehouse.id , product_id: product.id) %>
