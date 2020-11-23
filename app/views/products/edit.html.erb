@@ -1,19 +1,21 @@
-<h1> Edit the product details </h1>
+<%= link_to '<button type="button">Home Page</button>'.html_safe, root_path %>
+<h1> Product details </h1>
 
 <%= form_with(model: @product, local: :true) do |form| %>
-
-	<%= form.fields_for :inventories do |inventories_form| %>
-      <li>
-        <%= inventories_form.label :item_count %>
-        <%= inventories_form.text_field :item_count %>
-
-        <%= inventories_form.label :low_item_threshold %>
-        <%= inventories_form.text_field :low_item_threshold %>
-      </li>
-  <% end %>
-
-            
+  <ul>
+  	<%= form.fields_for :inventories do |inventories_form| %>
+        <li>
+          <%= inventories_form.object.warehouse.wh_name %> </br>
+          <%= inventories_form.label :item_count %>
+          <%= inventories_form.text_field :item_count %>
+          <%= inventories_form.label :low_item_threshold %>
+          <%= inventories_form.text_field :low_item_threshold %>
+        </li>
+    <% end %>
+  </ul> 
+             
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+

@@ -1,4 +1,32 @@
+<%= link_to '<button type="button">Home Page</button>'.html_safe, root_path %>
+
 <h1> Let's create a new warehouse </h1>
 
+<%= form_with(model:@warehouse, local: true) do |f|  %>
 
-<%= render 'form', warehouse: @warehouse %>
+	<div class="form-group row">
+		<%= f.label :warehouse_code, class: "col-3 col-form-label" %>
+		<div class="col-9">   
+			<%= f.text_field :wh_code, class: "form-control shadow rounded", placeholder: "Enter warehouse code" %>
+		</div>  
+    </div> <br>
+
+	<div class="form-group row">
+		<%= f.label :warehouse_name, class: "col-3 col-form-label" %> </br>
+		<div class="col-9">
+			<%= f.text_field :wh_name, rows:9, class: "form-control shadow rounded", placeholder: "Enter warehouse name" %>
+		</div>
+	</div> <br>
+
+	<div class="form-group row">
+		<%= f.label :warehouse_pincode, class: "col-3 col-form-label" %> </br>
+		<div class="col-9">
+			<%= f.text_field :pincode, rows:9, class: "form-control shadow rounded", placeholder: "Enter warehouse pincode" %>
+		</div>
+	</div> <br>
+
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+
+<% end %>

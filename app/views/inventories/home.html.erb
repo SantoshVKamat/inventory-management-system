@@ -1,40 +1,46 @@
-<h1>Inventory management system</h1>
-</br>
-<html>
-<head>
+<h1 style="text-align:center;">Inventory management system</h1>
+<div style="text-align:right;">
+	<%= link_to '<button type="button">Add a new warehouse </button>'.html_safe, new_warehouse_path %>
+</div> <br>
+
 <style>
 table, th, td {
   border: 1px solid black;
 }
 </style>
-</head>
-<body>
 
 <table>
-	<tr>
-		<th> Sku Code </th>
-		<th> Product name </th>
-		<% @products[1].warehouses.each do |warehouse| %>
-			<th>  <%= warehouse.wh_name %>'s item count</th>
-			<th>  <%= warehouse.wh_name %>'s minimum threshold </th>
-		<% end %>
-	</tr>		
-	
-	<% @products.each do |product| %>
-	<tr> 
-		<td> <%= link_to product.sku_code, edit_product_path(product.id)  %> </td>
-		<td> <%= product.product_name %> </td>
-		<% product.warehouses.each do |warehouse| %>
-			<% @inventory = Inventory.find_by(warehouse_id: warehouse.id , product_id: product.id) %>
-			<% if (@inventory.item_count < @inventory.low_item_threshold) %>
-				<td bgcolor="red">
-			<% else %>
-				<td>
-			<% end %>
-			<%= @inventory.item_count %>  </td>
-			<td> <%= @inventory.low_item_threshold %> </td>
-		<% end %>	
-	</tr>
+	<th> Sku Code </th>
+	<th> Product name </th>
+	<% @warehouses.each do |warehouse| %>
+		<th>  <%= warehouse.wh_name %>'s item count</th>
+		<th>  <%= warehouse.wh_name %>'s minimum threshold </th>
 	<% end %>
-	
+	<th> Actions </th>	
+
+	<% @products.each do |product| %>
+		<tr> 
+			<td> <%= link_to product.sku_code, edit_product_path(product.id) %> </td>
+			<td> <%= product.product_name %> </td>
+			<% @warehouses.each do |warehouse| %>
+			<% inventory = warehouse.get_inventory(product.id) %>
+				<% if inventory %>
+					<% if (inventory.item_count < inventory.low_item_threshold) %>
+						<td bgcolor="red">
+					<% else %>
+						<td>
+					<% end %>
+					<%= inventory.item_count %> </td>
+					<td> <%= inventory.low_item_threshold %> </td>
+				<% else %>
+					<td> </td>
+					<td> </td>
+				<% end %>			
+			<% end %>	
+		</tr>
+	<td> <%= link_to 'Delete', product_path(product), method: :Delete, data: {confirm: "Are you sure?"},class: "btn btn-outline-danger" %></a> </td>
+
+	<% end %>
+
+
 </table>
